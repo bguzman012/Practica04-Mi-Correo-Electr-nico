@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="../css/crear_usuario.css">
-    <title>Ingresa Datos</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Formulario</title>
 </head>
 
 <body>
     <div class="contenido">
         <div class="formu">
-            <form id="formulario" method="POST" action="../controladores/crear_usuario.php" onsubmit="return validarCamposObligatorios()">
-                <h3>Ingresa Tus Datos...!!!!</h3>
+            <form id="formulario" method="POST" onsubmit="return validarCamposObligatorios()" action="tomas.html">
+                <h3>Llenar Formulario</h3>
                 <div class="informacion">
                     <label for="cedula">Cedula:</label>
                     <input type="text" id="cedula" name="cedula" value="" placeholder="Ingrese cedula"
@@ -45,12 +45,12 @@
                     <span id="mensajeTelefono" class="error"></span>
                 </div>
                 <div class="informacion">
-                    <label>fecha_nacimiento</label>
-                    <input type="date" name="fD" id="fD">
-                    <br>
+                    <label for="fecha">Fecha nacimiento:</label>
+                    <input type="text" id="fecha" name="fecha" value="" placeholder="Ingrese fecha dd/mm/yyyy"
+                        onkeypress="return checkDate(event)" oninput="return validarFecha()" maxlength="10" />
+                    <span id="mensajeFecha" class="error"></span>
                 </div>
-                
-               
+
                 <div class="informacion">
                     <label for="email">Correo Electronico:</label>
                     <input type="text" id="email" name="email" value="" placeholder="Ingrese correo"
@@ -64,12 +64,13 @@
                     <span id="mensajePassword" class="error"></span>
                 </div>
                 <div class="botones">
-                    <input class="boton" id="btn" type="submit" value="Enviar"disabled >
+                    <input class="boton" id="btn" type="submit" value="Ingresar" disabled>
                     <input class="boton" id="btnLimpiar" type="button" value="Borrar" onclick="limpiar()">
                 </div>
             </form>
         </div>
     </div>
-    <script src="main.js"></script>
+    <script src="validacion.js"></script>
 </body>
+
 </html>

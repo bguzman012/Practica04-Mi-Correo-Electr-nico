@@ -3,36 +3,36 @@ var banNombre = false;
 var banApellido = false;
 var banTelefono = false;
 var banDir = false;
-
+var banFecha = false;
 var banCorreo = false;
 var banPasword = false;
 
 function validarCamposObligatorios() {
   var bandera = true;
-  
+  banFecha = false;
   banDir = false;
   for (var i = 0; i < document.forms[0].elements.length; i++) {
     var elemento = document.forms[0].elements[i];
     if (elemento.value == "" && elemento.type == "text") {
       if (elemento.id == "cedula") {
         document.getElementById("mensajeCedula").innerHTML =
-          "<br>La cedula no esta bien ingresada";
+          "<br>Dato Vacio";
       }
       if (elemento.id == "nombre") {
         document.getElementById("mensajeNombre").innerHTML =
-          "<br>El nombre esta mal ingresado";
+          "<br>Dato Vacio";
       }
       if (elemento.id == "apellido") {
         document.getElementById("mensajeApellido").innerHTML =
-          "<br>El Apellido esta mal ingresado";
+          "<br>Dato Vacio";
       }
       if (elemento.id == "direccion") {
         document.getElementById("mensajeDireccion").innerHTML =
-          "<br>La direccion esta mal ingresado";
+          "<br>Dato Vacio";
       }
       if (elemento.id == "telefono") {
         document.getElementById("mensajeTelefono").innerHTML =
-          "<br>El telefono esta mal ingresadi=o";
+          "<br>Dato Vacio";
       }
       elemento.style.border = "2px red solid";
       elemento.className = "error";
@@ -54,7 +54,7 @@ function validarCamposObligatorios() {
     }
   }
   if (!bandera) {
-    alert("Falta datos");
+    alert("Dato Vacio");
     return bandera;
   }
 }
@@ -88,14 +88,14 @@ function validarCedula() {
         banCedula = false;
         activarBtn();
         document.getElementById("mensajeCedula").innerHTML =
-          "<br>Numero erroneo";
+          "<br>Cedula Incorrecta";
       }
     }
   } else {
     banCedula = false;
     activarBtn();
     document.getElementById("mensajeCedula").innerHTML =
-      "<br>Numero de cedula incorrecto";
+      "<br>Cedula Incorrecta";
   }
   return false;
 }
@@ -103,7 +103,7 @@ function validarCedula() {
 function validarNumero(evt) {
   var charCode = evt.which ? evt.which : event.keyCode;
   if (!(charCode >= 48 && charCode <= 57)) {
-    alert("Solo se permiten numeros.");
+    alert("Ingrese solo numeros.");
     return false;
   }
   return true;
@@ -140,7 +140,7 @@ function validarNombre() {
   } else {
     activarBtn();
     document.getElementById("mensajeNombre").innerHTML =
-      "<br>Ingrese Un Nombre Correcto";
+      "<br>Ingrese nombre correcto";
   }
   return false;
 }
@@ -156,7 +156,7 @@ function validarApellido() {
   } else {
     activarBtn();
     document.getElementById("mensajeApellido").innerHTML =
-      "<br>Ingrese un Apellido Valido";
+      "<br>Ingrese apellido correcto";
   }
   return false;
 }
@@ -169,13 +169,112 @@ function checkDate(evt) {
   }
 }
 
+function validarFecha() {
+  banFecha = false;
+  var elemento = document.getElementById("fecha");
+  var fecha = elemento.value.split("/");
+  if (elemento.value.length != 10) {
+    document.getElementById("mensajeFecha").innerHTML =
+      "<br>Ingrese fecha valida: 25/10/2019";
+    return false;
+  } else {
+    document.getElementById("mensajeFecha").innerHTML = "";
+  }
+  try {
+    if (fecha.length == 3 && fecha[2].length == 4) {
+      var dia = fecha[0];
+      var mes = fecha[1];
+      var year = fecha[2];
+      var dmax;
+      if (year < 1000 || year > new Date().getFullYear()) {
+        alert("Año Incorrecto");
+        if (year > new Date().getFullYear())
+          document.getElementById("mensajeFecha").innerHTML =
+            "<br>El año no debe ser mayor al actual";
+        return false;
+      }
+      if (dia.length == 2 && mes.length == 2 && year.length == 4) {
+        switch (parseInt(mes)) {
+          case 1:
+            dmax = 31;
+            break;
+          case 2:
+            if (year % 4 == 0) dmax = 29;
+            else dmax = 28;
+            break;
+          case 3:
+            dmax = 31;
+            break;
+          case 4:
+            dmax = 30;
+            break;
+          case 5:
+            dmax = 31;
+            break;
+          case 6:
+            dmax = 30;
+            break;
+          case 7:
+            dmax = 31;
+            break;
+          case 8:
+            dmax = 31;
+            break;
+          case 9:
+            dmax = 30;
+            break;
+          case 10:
+            dmax = 31;
+            break;
+          case 11:
+            dmax = 30;
+            break;
+          case 12:
+            dmax = 31;
+            break;
+          default:
+            alert("error mes");
+            document.getElementById("mensajeFecha").innerHTML =
+              "<br>El mes ingresado no existe";
+            return false;
+        }
+        if (dia < 1 || dia > dmax) {
+          alert("error dia");
+          document.getElementById("mensajeFecha").innerHTML =
+            "<br>El dia ingresado no existe";
+          return false;
+        }
+      } else {
+        alert("Fecha incorrecta");
+        estado = false;
+      }
+    }
+    if (
+      (fecha.length != 3 || fecha[2].length < 4) &&
+      elemento.value.length == 10
+    ) {
+      alert("Fecha Incorrecta");
+      document.getElementById("mensajeFecha").innerHTML =
+        "<br>Ingrese fecha valida: 25/10/2019";
+      return false;
+    }
+  } catch (err) {
+    alert("Error fechas");
+    return false;
+  }
+  banFecha = true;
+  activarBtn();
+  return true;
+}
+
 function validarCorreo() {
-  banCorreo = false;  var elemento = document.getElementById("email");
+  banCorreo = false;
+  var elemento = document.getElementById("email");
   var correo = elemento.value.split("@");
   if (correo.length == 2) {
     if (correo[0].length < 3) {
       document.getElementById("mensajeEmail").innerHTML =
-        "<br>Direccion no valido ateneg1@ups.edu.ec <br>Direccion no valido ateng1@est.ups.edu.ec";
+        "<br>Direccion invalido bguzmanc@ups.edu.ec <br>Direccion no valido 123@est.ups.edu.ec";
       return false;
     }
     if (
@@ -190,7 +289,7 @@ function validarCorreo() {
     }
   } else {
     document.getElementById("mensajeEmail").innerHTML =
-      "<br>Direccion no valido ateneg1@ups.edu.ec <br>Direccion no valido ateneg1@est.ups.edu.ec";
+      "<br>Direccion invalido bguzmanc@ups.edu.ec <br>Direccion no valido 123@est.ups.edu.ec";
     return false;
   }
   banCorreo = true;
@@ -215,7 +314,7 @@ function validarPassword() {
     }
     if (!banCaracter)
       document.getElementById("mensajePassword").innerHTML =
-        "<br>Debe contener un caracter especial @ _ $";
+        "<br>Caracter Obligatorio --> @ _ $";
     if (!banMayus)
       document.getElementById("mensajePassword").innerHTML =
         "<br>Debe contener una Mayuscula";
@@ -238,7 +337,8 @@ function activarBtn() {
     banNombre &&
     banApellido &&
     banPasword &&
-    banCorreo 
+    banCorreo &&
+    banFecha
   ) {
     document.getElementById("btn").disabled = false;
     document.getElementById("btn").style.color = "rgb(255, 255, 255)";

@@ -1,0 +1,97 @@
+html {
+  background-color: aqua;
+  width: 100vw;
+  height: 100vh;
+}
+body {
+  max-width: fit-content;
+  margin: 0 auto;
+  display: block;
+  padding: 10px;
+}
+
+h3 {
+  text-align: center;
+  font-size: x-large;
+  color: darkblue;
+  font-family: sans-serif;
+}
+
+.contenido {
+  display: block;
+  padding: 3vh;
+  margin-top: 3vh;
+  max-width: 45vw;
+  background: linear-gradient(
+    to bottom,
+    blue
+  );
+  
+  height: auto;
+  width: fit-content;
+  
+}
+
+
+.error {
+  padding-left: unset;
+  text-align: center;
+  color: red;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: large;
+  display: inline-block;
+  color: darkblue;
+  margin-bottom: 1vh;
+  width: 23vh;
+  text-align: right;
+}
+
+#btn {
+    width: fit-content;
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    background-color: grey;
+    color: beige;
+    font-family: none;
+  }
+
+#btnLimpiar {
+  text-decoration: none;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  color: white;
+  background-color: dimgrey;
+  font-family: serif;
+}
+
+.botones {
+  max-width: fit-content;
+  margin: 0 auto;
+}
+
+.boton {
+  max-width: fit-content;
+  margin: 2vh;
+  width: fit-content;
+}
+
+input {
+  margin-left: 2vh;
+  color: black;
+  font-weight: bold;
+  font-size: large;
+  width: 28vw;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 2px solid #999;
+  font-family: sans-serif;
+}
