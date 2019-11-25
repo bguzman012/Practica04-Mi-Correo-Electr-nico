@@ -6,7 +6,7 @@
         <link type="text/css" rel="stylesheet" href="../css/crear_usuario.css">
     </head>
     <body>
-        <form class="box">
+        <form class="boxx">
         <?php
             //Incluir conexion a la base de datos
             include '../../config/conexionBD.php';
